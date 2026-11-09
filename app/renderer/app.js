@@ -21,6 +21,9 @@ const socket = io(SIGNAL_SERVER, { transports: ['websocket', 'polling'] });
 // ============================================================
 // DOM references
 // ============================================================
+const loadingScreen = document.getElementById('loading-screen');
+const mainUI        = document.getElementById('main-ui');
+
 const statusDot   = document.getElementById('status-dot');
 const statusLabel = document.getElementById('status-label');
 
@@ -114,6 +117,10 @@ function mapButton(btnNum) {
 
 socket.on('connect', () => {
   console.log('[socket] connected:', socket.id);
+  // Hide loading screen and show the main UI
+  loadingScreen.style.display = 'none';
+  mainUI.style.display = 'flex';
+  homeScreen.style.display = 'flex';
   setStatus('idle', 'Idle');
 });
 
