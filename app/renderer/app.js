@@ -13,7 +13,10 @@
 // ============================================================
 // Socket connection
 // ============================================================
-const socket = io('http://localhost:3000', { transports: ['websocket', 'polling'] });
+// In dev (npm start) connect to local server; in packaged app connect to Render
+const SIGNAL_SERVER = 'https://anylloyd-signaling.onrender.com';
+
+const socket = io(SIGNAL_SERVER, { transports: ['websocket', 'polling'] });
 
 // ============================================================
 // DOM references

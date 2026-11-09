@@ -82,7 +82,7 @@ function createWindow() {
           "default-src 'self'; " +
           "script-src 'self'; " +
           "style-src 'self' 'unsafe-inline'; " +
-          "connect-src 'self' http://localhost:3000 ws://localhost:3000 wss://localhost:3000; " +
+          "connect-src 'self' http://localhost:3000 ws://localhost:3000 wss://localhost:3000 https://anylloyd-signaling.onrender.com wss://anylloyd-signaling.onrender.com; " +
           "media-src 'self' blob: mediastream:; " +
           "img-src 'self' data: blob:"
         ]
