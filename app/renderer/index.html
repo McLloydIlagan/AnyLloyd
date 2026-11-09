@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnyLloyd</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-icon">🖥</span>
+      <span class="logo-text">AnyLloyd</span>
+    </div>
+    <div class="status-indicator">
+      <span id="status-dot" class="status-dot idle"></span>
+      <span id="status-label">Idle</span>
+    </div>
+  </header>
+
+  <!-- ===== Home Screen ===== -->
+  <main id="home-screen" class="home-screen">
+    <div class="panel">
+      <h2 class="panel-title">This Computer</h2>
+      <p class="panel-subtitle">Share your screen with a remote user</p>
+
+      <div class="session-id-wrapper" id="session-id-wrapper" style="display:none;">
+        <span class="session-id-label">Your Session ID</span>
+        <div class="session-id-row">
+          <span id="session-id-display" class="session-id">——————</span>
+          <button id="copy-btn" class="btn btn-secondary" title="Copy to clipboard">Copy</button>
+        </div>
+      </div>
+
+      <button id="host-btn" class="btn btn-primary btn-large">Start Hosting</button>
+      <button id="stop-host-btn" class="btn btn-danger" style="display:none;">Stop Hosting</button>
+      <p id="host-status" class="status-text"></p>
+    </div>
+
+    <div class="panel-divider"></div>
+
+    <div class="panel">
+      <h2 class="panel-title">Remote Computer</h2>
+      <p class="panel-subtitle">Connect to a remote session</p>
+
+      <div class="input-group">
+        <input
+          id="session-input"
+          class="text-input"
+          type="text"
+          maxlength="6"
+          placeholder="Enter 6-digit session ID"
+          autocomplete="off"
+        />
+        <button id="connect-btn" class="btn btn-primary">Connect</button>
+      </div>
+      <button id="disconnect-btn" class="btn btn-danger" style="display:none;">Disconnect</button>
+      <p id="viewer-status" class="status-text"></p>
+    </div>
+  </main>
+
+  <!-- ===== Remote View ===== -->
+  <section id="remote-view" class="remote-view" style="display:none;">
+    <div class="remote-toolbar">
+      <span class="remote-label">Remote Desktop</span>
+      <button id="exit-remote-btn" class="btn btn-secondary btn-sm">✕ End Session</button>
+    </div>
+    <video id="remote-video" autoplay playsinline></video>
+  </section>
+
+  <!-- Socket.io client UMD bundle (exposes window.io) -->
+  <script src="../node_modules/socket.io-client/dist/socket.io.js"></script>
+  <!-- App renderer logic -->
+  <script src="app.js" type="module"></script>
+
+</body>
+</html>

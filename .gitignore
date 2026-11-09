@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+app/node_modules/
+server/node_modules/
+
+# Build output
+dist/
+app/assets/icon.ico
+
+# Electron builder cache
+dist/win-unpacked/
+dist/builder-debug.yml
+dist/builder-effective-config.yaml
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

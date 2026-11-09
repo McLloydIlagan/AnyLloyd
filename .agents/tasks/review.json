@@ -1,0 +1,38 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "id": 1,
+      "label": "mousedown/mouseup miss position",
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "description": "robot.mouseToggle is called without a preceding robot.moveMouse(x, y) in the mousedown and mouseup cases of the inject-input IPC handler. The viewer sends x/y with every click event but the handler discards them, so clicks land wherever the last mousemove left the cursor.",
+      "action": "Add robot.moveMouse(Math.round(x), Math.round(y)) at the top of the mousedown and mouseup cases in app/main.js inject-input handler."
+    },
+    {
+      "id": 2,
+      "label": "window.io load failure is silent",
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "description": "app.js is loaded as type=module and calls io() at module top-level, relying on window.io being set by the preceding UMD script tag. If the socket.io bundle fails to load (wrong path, network error), the module throws immediately and the entire app goes silent with no user-visible error.",
+      "action": "Add a startup guard in app.js: if (!window.io) display an error message to the user before attempting to call io()."
+    },
+    {
+      "id": 3,
+      "label": "ICE failure gives no actionable guidance",
+      "severity": "non-blocking",
+      "confidence": "likely",
+      "description": "No TURN server is configured. Connections across symmetric NATs or corporate firewalls fail at ICE negotiation. The only user-visible message is the generic 'Connection failed — host may be behind a restrictive NAT or firewall.' The README documents the limitation but the UI gives no actionable next step.",
+      "action": "Surface a more specific error message when connectionState reaches 'failed', pointing users to the Known Limitations section of the README or a TURN setup guide."
+    },
+    {
+      "id": 4,
+      "label": "Special key name mismatch",
+      "severity": "non-blocking",
+      "confidence": "likely",
+      "description": "keydown/keyup handlers pass e.key.toLowerCase() directly to robot.keyToggle. robotjs key names diverge from DOM e.key values for special keys (ArrowLeft -> 'arrowleft' vs robotjs 'left', Space -> ' ' vs 'space'). Special keys silently do nothing or emit wrong characters.",
+      "action": "Add a key-name translation map between DOM e.key values and robotjs key names for common special keys."
+    }
+  ],
+  "reviewDoc": "c:\\Users\\LloydIlagan\\Desktop\\AnyLloyd\\.agents\\tasks\\code-review.md"
+}
